@@ -44,3 +44,46 @@ class ManajemenDonasi:
     def sort_donasi_by_jumlah(self):
         self.donasi_list.sort(key=lambda donasi: donasi.jumlah, reverse=True)
 
+def search_donasi_by_nama(self, nama):
+        result = [
+            donasi for donasi in self.donasi_list
+            if nama.lower() in donasi.nama.lower()
+        ]
+        return result
+
+    def export_csv(self, filename):
+        with open(filename, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['ID', 'Nama', 'Jumlah', 'Tanggal'])
+            for donasi in self.donasi_list:
+                writer.writerow(
+                    [donasi.id, donasi.nama, donasi.jumlah, donasi.tanggal])
+        print("Data berhasil disimpan ke dalam file CSV.")
+
+
+def main():
+    manajemen = ManajemenDonasi()
+
+    while True:
+        print("\n=== Sistem Manajemen Donasi ===")
+        print("1. Tambah Donasi")
+        print("2. Lihat Donasi")
+        print("3. Update Donasi")
+        print("4. Hapus Donasi")
+        print("5. Urutkan Donasi berdasarkan Jumlah")
+        print("6. Cari Donasi berdasarkan Nama")
+        print("7. Simpan Data ke CSV")
+        print("0. Keluar")
+
+        pilihan = input("Pilih menu: ")
+
+        if pilihan == '1':
+            id = input("ID: ")
+            nama = input("Nama Donatur: ")
+            jumlah = int(input("Jumlah Donasi: "))
+            tanggal = input("Tanggal Donasi: ")
+            manajemen.create_donasi(id, nama, jumlah, tanggal)
+            print("Donasi berhasil ditambahkan.")
+
+        elif pilihan == '2':
+            manajemen.read_donasi()

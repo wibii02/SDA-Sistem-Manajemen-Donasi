@@ -1,1 +1,46 @@
+import csv
+
+class Donasi:
+    def __init__(self, id, nama, jumlah, tanggal):
+        self.id = id
+        self.nama = nama
+        self.jumlah = jumlah
+        self.tanggal = tanggal
+
+    def __repr__(self):
+        return f"Donasi(ID: {self.id}, Nama: {self.nama}, Jumlah: {self.jumlah}, Tanggal: {self.tanggal})"
+
+class ManajemenDonasi:
+    def __init__(self):
+        self.donasi_list = []
+
+    def create_donasi(self, id, nama, jumlah, tanggal):
+        donasi = Donasi(id, nama, jumlah, tanggal)
+        self.donasi_list.append(donasi)
+
+    def read_donasi(self):
+        for donasi in self.donasi_list:
+            print(donasi)
+
+    def update_donasi(self, id, nama=None, jumlah=None, tanggal=None):
+        for donasi in self.donasi_list:
+            if donasi.id == id:
+                if nama:
+                    donasi.nama = nama
+                if jumlah:
+                    donasi.jumlah = jumlah
+                if tanggal:
+                    donasi.tanggal = tanggal
+                return True
+        return False
+
+    def delete_donasi(self, id):
+        for donasi in self.donasi_list:
+            if donasi.id == id:
+                self.donasi_list.remove(donasi)
+                return True
+        return False
+
+    def sort_donasi_by_jumlah(self):
+        self.donasi_list.sort(key=lambda donasi: donasi.jumlah, reverse=True)
 

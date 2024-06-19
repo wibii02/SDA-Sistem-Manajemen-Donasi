@@ -87,3 +87,50 @@ def main():
 
         elif pilihan == '2':
             manajemen.read_donasi()
+
+elif pilihan == '3':
+            id = input("ID Donasi yang akan diupdate: ")
+            nama = input("Nama Donatur (biarkan kosong jika tidak diubah): ")
+            jumlah = input(
+                "Jumlah Donasi (biarkan kosong jika tidak diubah): ")
+            tanggal = input(
+                "Tanggal Donasi (biarkan kosong jika tidak diubah): ")
+            jumlah = int(jumlah) if jumlah else None
+            if manajemen.update_donasi(id, nama, jumlah, tanggal):
+                print("Donasi berhasil diupdate.")
+            else:
+                print("Donasi tidak ditemukan.")
+
+        elif pilihan == '4':
+            id = input("ID Donasi yang akan dihapus: ")
+            if manajemen.delete_donasi(id):
+                print("Donasi berhasil dihapus.")
+            else:
+                print("Donasi tidak ditemukan.")
+
+        elif pilihan == '5':
+            manajemen.sort_donasi_by_jumlah()
+            print("Donasi berhasil diurutkan berdasarkan jumlah.")
+
+        elif pilihan == '6':
+            nama = input("Nama Donatur yang dicari: ")
+            hasil_pencarian = manajemen.search_donasi_by_nama(nama)
+            if hasil_pencarian:
+                for donasi in hasil_pencarian:
+                    print(donasi)
+            else:
+                print("Tidak ada donasi yang ditemukan dengan nama tersebut.")
+
+        elif pilihan == '7':
+            filename = input("Nama file CSV untuk disimpan: ")
+            manajemen.export_csv(filename)
+
+        elif pilihan == '0':
+            print("Keluar dari program.")
+            break
+
+        else:
+            print("Pilihan tidak valid. Silakan coba lagi.")
+
+if _name_ == "_main_":
+    main()
